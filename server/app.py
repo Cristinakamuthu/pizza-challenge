@@ -71,6 +71,35 @@ def get_pizza():
 
     return response
 
+@app.route('/restaurantpizzas',method = ['GET','POST'])
+def post_restaurantpizzas():
+
+    if request.method == 'GET':
+        restaurantpizza = []
+        for restaurantspizza in RestaurantPizza.query.all():
+            restaurantpizza_dict = restaurantspizza.to_dict()
+            restaurantpizza.append(restaurantpizza_dict)
+
+            response = make_response(restaurantpizza,200)
+
+            return response
+        else:
+            request.method == 'POST':
+            new_restaurantpizza = RestaurantPizza(
+                price = request.form.get("price")
+                restaurant_id= request.form.get("restaurant_id")
+                pizza_id = request.form.get("pizza_id")
+            )
+
+            db.session.add(new_restaurantpizza)
+            db.session.commit()
+
+            new_restaurantpizza_dict = new_restaurantpizza.to_dict()
+
+            response = make_response(new_restaurantpizza_dict, 201)
+
+            return response
+
 
 
 
