@@ -21,8 +21,10 @@ def original():
 @app.route('/restaurants')
 def get_restaurants():
     restaurants = Restaurant.query.all()
-    restaurant_list = [r.to_dict() for r in restaurants]
-    response = make_response(jsonify(restaurant_list), 200)
+
+    restaurant_dict = restaurants.to_dict()
+
+    response = make_response(jsonify(restaurant_dict), 200)
 
     return response
 
