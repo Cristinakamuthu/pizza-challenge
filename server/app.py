@@ -9,17 +9,36 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///pizza.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
 
+migrate = Migrate(app, db)
+
 db.init_app(app)
+
+@app.route('/')
+def original():
+    return "yuhuuuuuuu welcome to my backend api application tbh i am so excitedddddddddddddddd yarr so in this we have a few routes to use in the url .. one restaurants .. then restaurants with id thenthe rest are just CRUD operations... have fun!!!!!!!!!!"
+
 
 @app.route('/restaurants')
 def get_restaurants():
     restaurants = Restaurant.query.all()
-
     restaurant_list = [r.to_dict() for r in restaurants]
-
     response = make_response(jsonify(restaurant_list), 200)
 
     return response
+
+@app.route('/restaurants/<int:id>')
+def individual_restaurant(id):
+    individual = Restaurant.query.filter(Restaurant.id == id).first()
+
+    individual_dict = individual.to_dict()
+
+    response = make_response(
+        individual_dict,200
+    )
+    return response
+
+
+
 
 if __name__ =='__main__':
     app.run(port=5555, debug=True)
