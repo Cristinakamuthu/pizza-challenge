@@ -30,4 +30,4 @@ with app.app_context():
     db.session.add_all([rp1, rp2, rp3, rp4, rp5])
     db.session.commit()
 
-    print("🌱 Seed data loaded!")
+    print("seed data is okay ")
