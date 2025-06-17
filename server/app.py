@@ -32,12 +32,14 @@ def get_restaurants():
 def individual_restaurant(id):
     individual = Restaurant.query.filter(Restaurant.id == id).first()
 
+    if not individual:
+        return make_response(jsonify({"error": "Restaurant not found"}), 404)
+
     individual_dict = individual.to_dict()
 
-    response = make_response(
-        individual_dict,200
-    )
+    response = make_response(jsonify(individual_dict), 200)
     return response
+
 
 
 
