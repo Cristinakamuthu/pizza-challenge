@@ -11,6 +11,3 @@ app.json.compact = False
 
 db.init_app(app)
 
-with app.app_context():
-    db.create_all()
-    print("Tables are  created!")

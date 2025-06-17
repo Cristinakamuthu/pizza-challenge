@@ -2,11 +2,14 @@ from app import app
 from models import db, Restaurant, Pizza, RestaurantPizza
 
 with app.app_context():
+    db.create_all()
     Restaurant.query.delete()
     Pizza.query.delete()
     RestaurantPizza.query.delete()
+   
 
     db.session.commit()
+    
 
     r1 = Restaurant(name="Mama's Kitchen", address="123 Food St")
     r2 = Restaurant(name="Pizza Palace", address="456 Dough Rd")
@@ -29,5 +32,5 @@ with app.app_context():
 
     db.session.add_all([rp1, rp2, rp3, rp4, rp5])
     db.session.commit()
-
+    
     print("seed data is okay ")
