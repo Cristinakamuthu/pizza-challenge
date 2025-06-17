@@ -72,31 +72,30 @@ def get_pizza():
     return response
 
 @app.route('/restaurantpizzas', methods=['GET', 'POST'])
-def post_restaurantpizzas():
+def restaurantpizzas():
     if request.method == 'GET':
-        restaurantpizza = []
-        for restaurantspizza in RestaurantPizza.query.all():
-            restaurantpizza_dict = restaurantspizza.to_dict()
-            restaurantpizza.append(restaurantpizza_dict)
-        response = make_response(restaurantpizza, 200)
+        pizzas = [rp.to_dict() for rp in RestaurantPizza.query.all()]
+        return make_response(pizzas, 200)
 
-        return response
-    
-    elif request.method == 'POST':
+    data = request.get_json()
+    price = data.get('price')
 
-        data = request.get_json()
+    if not isinstance(price, (int, float)):
+        return jsonify({'error': 'Price must be a number'}), 400
+    if price < 1 or price > 30:
+        return jsonify({'error': 'Price must be between 1 and 30'}), 400
 
-        new_restaurantpizza = RestaurantPizza(
-            price=data.get("price"),
-            restaurant_id=data.get("restaurant_id"),
-            pizza_id=data.get("pizza_id")
-        )
-        db.session.add(new_restaurantpizza)
-        db.session.commit()
-        new_restaurantpizza_dict = new_restaurantpizza.to_dict()
-        response = make_response(new_restaurantpizza_dict, 201)
+    new_rp = RestaurantPizza(
+        price=price,
+        restaurant_id=data.get('restaurant_id'),
+        pizza_id=data.get('pizza_id')
+    )
+    db.session.add(new_rp)
+    db.session.commit()
 
-        return response
+    response = make_response(new_rp.to_dict(), 201)
+    return response
+
 
 
 
