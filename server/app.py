@@ -65,11 +65,13 @@ def delete_by_id(id):
 def get_pizza():
     pizza = Pizza.query.all()
 
-    pizza_dict = [pizza.to_dict() for pizz in pizza ]
+    pizza_dict = [pizz.to_dict() for pizz in pizza ]
 
     response = make_response(jsonify(pizza_dict), 200)
 
     return response
+
+
 
 
 
