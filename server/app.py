@@ -58,7 +58,7 @@ def delete_by_id(id):
             "message": " Restaurant deleted successfully!"
         }
 
-        response = make_response(jsonify(response_body), 200)
+        response = make_response(jsonify(response_body), 204)
         return response
     
 @app.route('/pizzas')

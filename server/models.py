@@ -2,7 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData, CheckConstraint
 from sqlalchemy_serializer import SerializerMixin
 
-
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
@@ -18,7 +17,12 @@ class Restaurant(db.Model, SerializerMixin):
     name = db.Column(db.String, unique=True)
     address = db.Column(db.String)
 
-    restaurantpizzas = db.relationship('RestaurantPizza', back_populates='restaurant')
+    restaurantpizzas = db.relationship(
+        'RestaurantPizza',
+        back_populates='restaurant',
+        cascade='all, delete-orphan',
+        passive_deletes=True
+    )
 
     def __repr__(self):
         return f'<Restaurant {self.name} at {self.address}>'
@@ -32,7 +36,12 @@ class Pizza(db.Model, SerializerMixin):
     name = db.Column(db.String, unique=True)
     ingredients = db.Column(db.String)
 
-    restaurantpizzas = db.relationship('RestaurantPizza', back_populates='pizza')
+    restaurantpizzas = db.relationship(
+        'RestaurantPizza',
+        back_populates='pizza',
+        cascade='all, delete-orphan',
+        passive_deletes=True
+    )
 
     def __repr__(self):
         return f'<Pizza {self.name} contains {self.ingredients}>'
@@ -44,8 +53,8 @@ class RestaurantPizza(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Integer, nullable=False)
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
-    pizza_id = db.Column(db.Integer, db.ForeignKey('pizzas.id'))
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id', ondelete='CASCADE'), nullable=False)
+    pizza_id = db.Column(db.Integer, db.ForeignKey('pizzas.id', ondelete='CASCADE'), nullable=False)
 
     restaurant = db.relationship('Restaurant', back_populates='restaurantpizzas')
     pizza = db.relationship('Pizza', back_populates='restaurantpizzas')
