@@ -33,6 +33,7 @@ bash
 python debug.py
 What the Project Does
 This project simulates a pizza ordering system where:
+```
 
 Features
 - get (returns) a list of all restaurants
@@ -70,17 +71,16 @@ Dependencies
 Python 3.11+
 SQLAlchemy
 SQLite (comes with Python)
-Install dependencies with:
+ 3.  **Install dependencies with:**
 
-bash
+```bash
 pip install -r requirements.txt
 Examples
 Run python debug.py to use an interactive shell where you can test the functionality.
+```
 
 Add a customer and a pizza
 python
-Copy
-Edit
 from models import Customer, Pizza, session
 
 customer = Customer(name="Cristina Kamuthu")
