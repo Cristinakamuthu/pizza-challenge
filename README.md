@@ -34,21 +34,37 @@ python debug.py
 What the Project Does
 This project simulates a pizza ordering system where:
 
-Customers can be added to the database
-
-Pizzas can be created and associated with orders
-
-Orders link customers and pizzas together
-
-You can query which pizzas a customer has ordered
-
-You can find which customers have ordered a particular pizza
-
 Features
-Create new customers and pizzas
-Place and manage orders
-Query customer and pizza relationships using SQLAlchemy models
-Includes helper methods for easy access to related data
+- get (returns) a list of all restaurants
+
+![alt text](image-1.png)
+
+- get (returns) details of a single restaurant and its pizzas.
+
+![alt text](image-2.png)
+ - if not there brings out a message
+
+![alt text](image-3.png)
+
+- Deletes a restaurant and all related RestaurantPizzas
+
+![alt text](image-4.png)
+
+![alt text](image-5.png)
+
+-  gets (returns) a list of pizzas
+
+![alt text](image-6.png)
+
+- Creates a new RestaurantPizza
+
+![alt text](image-7.png)
+
+ - if price is not an integer or beyond the range of 30 returns an error response :
+
+ ![alt text](image-8.png)
+
+ ![alt text](image-9.png)
 
 Dependencies
 Python 3.11+
