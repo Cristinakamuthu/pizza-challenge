@@ -23,9 +23,9 @@ Create a virtual environment (recommended)
 bash
 python -m venv env
 source env/bin/activate   
-Install the dependencies
+2.  **Install the dependencies**
 
-bash
+ ```bash
 pip install -r requirements.txt
 Run the application
 
@@ -106,7 +106,7 @@ Get all customers who ordered a specific pizza
 python
 print(pizza.orders)          # Returns list of Order objects
 print(pizza.customers())     # Returns list of Customer objects
-Notes
+
 
 
 future plans
