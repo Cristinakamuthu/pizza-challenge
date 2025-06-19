@@ -79,38 +79,17 @@ Examples
 Run python debug.py to use an interactive shell where you can test the functionality.
 ```
 
-4. **Add a customer and a pizza **
+4. **Add a restaurant and a pizza **
 python
 ```bash
-from models import Customer, Pizza, session
+from models import Restaurant, Pizza, session
 
-customer = Customer(name="Cristina Kamuthu")
+customer = Restaurant(name="Kamuthu's kitchen")
 pizza = Pizza(name="BBQ Chicken")
 
-session.add_all(customer, pizza])
+session.add_all(restaurant, pizza])
 session.commit()
 ```
-
-- Place an order
-
-```bash
-from models import Order
-
-order = Order(customer=customer, pizza=pizza)
-session.add(order)
-session.commit()
-```
-- Get all pizzas ordered by a customer
-``` bash
-print(customer.orders)       # Returns list of Order objects
-print(customer.pizzas())     # Returns list of Pizza objects
-```
-- Get all customers who ordered a specific pizza
-``` bash
-print(pizza.orders)          # Returns list of Order objects
-print(pizza.customers())     # Returns list of Customer objects
-```
-
 
 
 future plans
